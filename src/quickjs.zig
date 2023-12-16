@@ -874,13 +874,13 @@ pub inline fn JS_GetProperty(arg_ctx: ?*JSContext, arg_this_obj: JSValue, arg_pr
 }
 pub extern fn JS_GetPropertyStr(ctx: ?*JSContext, this_obj: JSValue, prop: [*c]const u8) JSValue;
 pub extern fn JS_GetPropertyUint32(ctx: ?*JSContext, this_obj: JSValue, idx: u32) JSValue;
-pub extern fn JS_SetPropertyInternal(ctx: ?*JSContext, this_obj: JSValue, prop: JSAtom, val: JSValue, flags: c_int) c_int;
+pub extern fn JS_SetPropertyInternal(ctx: ?*JSContext, obj: JSValue, prop: JSAtom, val: JSValue, this_obj: JSValue, flags: c_int) c_int;
 pub fn JS_SetProperty(arg_ctx: ?*JSContext, arg_this_obj: JSValue, arg_prop: JSAtom, arg_val: JSValue) callconv(.C) c_int {
     var ctx = arg_ctx;
     var this_obj = arg_this_obj;
     var prop = arg_prop;
     var val = arg_val;
-    return JS_SetPropertyInternal(ctx, this_obj, prop, val, @as(c_int, 1) << @intCast(14));
+    return JS_SetPropertyInternal(ctx, this_obj, prop, val, this_obj, @as(c_int, 1) << @intCast(14));
 }
 pub extern fn JS_SetPropertyUint32(ctx: ?*JSContext, this_obj: JSValue, idx: u32, val: JSValue) c_int;
 pub extern fn JS_SetPropertyInt64(ctx: ?*JSContext, this_obj: JSValue, idx: i64, val: JSValue) c_int;
