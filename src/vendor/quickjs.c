@@ -197,7 +197,7 @@ typedef enum JSErrorEnum {
     JS_NATIVE_ERROR_COUNT, /* number of different NativeError objects */
 } JSErrorEnum;
 
-#define JS_MAX_LOCAL_VARS 65536
+#define JS_MAX_LOCAL_VARS 65535
 #define JS_STACK_SIZE_MAX 65534
 #define JS_STRING_LEN_MAX ((1 << 30) - 1)
 
@@ -440,7 +440,6 @@ struct JSContext {
 #endif
     /* when the counter reaches zero, JSRutime.interrupt_handler is called */
     int interrupt_counter;
-    BOOL is_error_property_enabled;
 
     struct list_head loaded_modules; /* list of JSModuleDef.link */
 
@@ -4064,7 +4063,7 @@ void JS_FreeCString(JSContext *ctx, const char *ptr)
     if (!ptr)
         return;
     /* purposely removing constness */
-    p = (JSString *)(void *)(ptr - offsetof(JSString, u));
+    p = container_of(ptr, JSString, u);
     JS_FreeValue(ctx, JS_MKPTR(JS_TAG_STRING, p));
 }
 
@@ -9081,15 +9080,19 @@ int JS_DefineProperty(JSContext *ctx, JSValueConst this_obj,
                                spaces. */
                             if (!js_same_value(ctx, val, *pr->u.var_ref->pvalue))
                                 goto not_configurable;
+                        } else {
+                            /* update the reference */
+                            set_value(ctx, pr->u.var_ref->pvalue,
+                                      JS_DupValue(ctx, val));
                         }
-                        /* update the reference */
-                        set_value(ctx, pr->u.var_ref->pvalue,
-                                  JS_DupValue(ctx, val));
                     }
                     /* if writable is set to false, no longer a
                        reference (for mapped arguments) */
                     if ((flags & (JS_PROP_HAS_WRITABLE | JS_PROP_WRITABLE)) == JS_PROP_HAS_WRITABLE) {
                         JSValue val1;
+                        if (p->class_id == JS_CLASS_MODULE_NS) {
+                            return JS_ThrowTypeErrorOrFalse(ctx, flags, "module namespace properties have writable = false");
+                        }
                         if (js_shape_prepare_update(ctx, p, &prs))
                             return -1;
                         val1 = JS_DupValue(ctx, *pr->u.var_ref->pvalue);
@@ -9950,12 +9953,13 @@ static inline int to_digit(int c)
 }
 
 /* XXX: remove */
-static double js_strtod(const char *p, int radix, BOOL is_float)
+static double js_strtod(const char *str, int radix, BOOL is_float)
 {
     double d;
     int c;
     
     if (!is_float || radix != 10) {
+        const char *p = str;
         uint64_t n_max, n;
         int int_exp, is_neg;
         
@@ -9982,6 +9986,8 @@ static double js_strtod(const char *p, int radix, BOOL is_float)
             if (n <= n_max) {
                 n = n * radix + c;
             } else {
+                if (radix == 10)
+                    goto strtod_case;
                 int_exp++;
             }
             p++;
@@ -9993,7 +9999,8 @@ static double js_strtod(const char *p, int radix, BOOL is_float)
         if (is_neg)
             d = -d;
     } else {
-        d = strtod(p, NULL);
+    strtod_case:
+        d = strtod(str, NULL);
     }
     return d;
 }
@@ -25140,7 +25147,6 @@ static __exception int js_parse_assign_expr2(JSParseState *s, int parse_flags)
                 /* OP_async_yield_star takes the value as parameter */
                 emit_op(s, OP_get_field);
                 emit_atom(s, JS_ATOM_value);
-                emit_op(s, OP_await);
                 emit_op(s, OP_async_yield_star);
             } else {
                 /* OP_yield_star takes (value, done) as parameter */
@@ -25780,6 +25786,9 @@ static __exception int js_parse_for_in_of(JSParseState *s, int label_name,
             emit_atom(s, var_name);
             emit_u16(s, fd->scope_level);
         }
+    } else if (!is_async && token_is_pseudo_keyword(s, JS_ATOM_async) &&
+               peek_token(s, FALSE) == TOK_OF) {
+        return js_parse_error(s, "'for of' expression cannot start with 'async'");
     } else {
         int skip_bits;
         if ((s->token.val == '[' || s->token.val == '{')
@@ -41099,26 +41108,6 @@ static BOOL test_final_sigma(JSString *p, int sigma_pos)
     return !lre_is_cased(c1);
 }
 
-static JSValue js_string_localeCompare(JSContext *ctx, JSValueConst this_val,
-                                       int argc, JSValueConst *argv)
-{
-    JSValue a, b;
-    int cmp;
-
-    a = JS_ToStringCheckObject(ctx, this_val);
-    if (JS_IsException(a))
-        return JS_EXCEPTION;
-    b = JS_ToString(ctx, argv[0]);
-    if (JS_IsException(b)) {
-        JS_FreeValue(ctx, a);
-        return JS_EXCEPTION;
-    }
-    cmp = js_string_compare(ctx, JS_VALUE_GET_STRING(a), JS_VALUE_GET_STRING(b));
-    JS_FreeValue(ctx, a);
-    JS_FreeValue(ctx, b);
-    return JS_NewInt32(ctx, cmp);
-}
-
 static JSValue js_string_toLowerCase(JSContext *ctx, JSValueConst this_val,
                                      int argc, JSValueConst *argv, int to_lower)
 {
@@ -41204,23 +41193,38 @@ static JSValue JS_NewUTF32String(JSContext *ctx, const uint32_t *buf, int len)
     return JS_EXCEPTION;
 }
 
+static int js_string_normalize1(JSContext *ctx, uint32_t **pout_buf, 
+                                JSValueConst val,
+                                UnicodeNormalizationEnum n_type)
+{
+    int buf_len, out_len;
+    uint32_t *buf, *out_buf;
+    
+    buf_len = JS_ToUTF32String(ctx, &buf, val);
+    if (buf_len < 0)
+        return -1;
+    out_len = unicode_normalize(&out_buf, buf, buf_len, n_type,
+                                ctx->rt, (DynBufReallocFunc *)js_realloc_rt);
+    js_free(ctx, buf);
+    if (out_len < 0)
+        return -1;
+    *pout_buf = out_buf;
+    return out_len;
+}
+
 static JSValue js_string_normalize(JSContext *ctx, JSValueConst this_val,
                                    int argc, JSValueConst *argv)
 {
     const char *form, *p;
     size_t form_len;
-    int is_compat, buf_len, out_len;
+    int is_compat, out_len;
     UnicodeNormalizationEnum n_type;
     JSValue val;
-    uint32_t *buf, *out_buf;
+    uint32_t *out_buf;
 
     val = JS_ToStringCheckObject(ctx, this_val);
     if (JS_IsException(val))
         return val;
-    buf_len = JS_ToUTF32String(ctx, &buf, val);
-    JS_FreeValue(ctx, val);
-    if (buf_len < 0)
-        return JS_EXCEPTION;
 
     if (argc == 0 || JS_IsUndefined(argv[0])) {
         n_type = UNICODE_NFC;
@@ -41246,22 +41250,96 @@ static JSValue js_string_normalize(JSContext *ctx, JSValueConst this_val,
             JS_FreeCString(ctx, form);
             JS_ThrowRangeError(ctx, "bad normalization form");
         fail1:
-            js_free(ctx, buf);
+            JS_FreeValue(ctx, val);
             return JS_EXCEPTION;
         }
         JS_FreeCString(ctx, form);
     }
 
-    out_len = unicode_normalize(&out_buf, buf, buf_len, n_type,
-                                ctx->rt, (DynBufReallocFunc *)js_realloc_rt);
-    js_free(ctx, buf);
+    out_len = js_string_normalize1(ctx, &out_buf, val, n_type);
+    JS_FreeValue(ctx, val);
     if (out_len < 0)
         return JS_EXCEPTION;
     val = JS_NewUTF32String(ctx, out_buf, out_len);
     js_free(ctx, out_buf);
     return val;
 }
-#endif /* CONFIG_ALL_UNICODE */
+
+/* return < 0, 0 or > 0 */
+static int js_UTF32_compare(const uint32_t *buf1, int buf1_len,
+                            const uint32_t *buf2, int buf2_len)
+{
+    int i, len, c, res;
+    len = min_int(buf1_len, buf2_len);
+    for(i = 0; i < len; i++) {
+        /* Note: range is limited so a subtraction is valid */
+        c = buf1[i] - buf2[i];
+        if (c != 0)
+            return c;
+    }
+    if (buf1_len == buf2_len)
+        res = 0;
+    else if (buf1_len < buf2_len)
+        res = -1;
+    else
+        res = 1;
+    return res;
+}
+
+static JSValue js_string_localeCompare(JSContext *ctx, JSValueConst this_val,
+                                       int argc, JSValueConst *argv)
+{
+    JSValue a, b;
+    int cmp, a_len, b_len;
+    uint32_t *a_buf, *b_buf;
+    
+    a = JS_ToStringCheckObject(ctx, this_val);
+    if (JS_IsException(a))
+        return JS_EXCEPTION;
+    b = JS_ToString(ctx, argv[0]);
+    if (JS_IsException(b)) {
+        JS_FreeValue(ctx, a);
+        return JS_EXCEPTION;
+    }
+    a_len = js_string_normalize1(ctx, &a_buf, a, UNICODE_NFC);
+    JS_FreeValue(ctx, a);
+    if (a_len < 0) {
+        JS_FreeValue(ctx, b);
+        return JS_EXCEPTION;
+    }
+
+    b_len = js_string_normalize1(ctx, &b_buf, b, UNICODE_NFC);
+    JS_FreeValue(ctx, b);
+    if (b_len < 0) {
+        js_free(ctx, a_buf);
+        return JS_EXCEPTION;
+    }
+    cmp = js_UTF32_compare(a_buf, a_len, b_buf, b_len);
+    js_free(ctx, a_buf);
+    js_free(ctx, b_buf);
+    return JS_NewInt32(ctx, cmp);
+}
+#else /* CONFIG_ALL_UNICODE */
+static JSValue js_string_localeCompare(JSContext *ctx, JSValueConst this_val,
+                                       int argc, JSValueConst *argv)
+{
+    JSValue a, b;
+    int cmp;
+
+    a = JS_ToStringCheckObject(ctx, this_val);
+    if (JS_IsException(a))
+        return JS_EXCEPTION;
+    b = JS_ToString(ctx, argv[0]);
+    if (JS_IsException(b)) {
+        JS_FreeValue(ctx, a);
+        return JS_EXCEPTION;
+    }
+    cmp = js_string_compare(ctx, JS_VALUE_GET_STRING(a), JS_VALUE_GET_STRING(b));
+    JS_FreeValue(ctx, a);
+    JS_FreeValue(ctx, b);
+    return JS_NewInt32(ctx, cmp);
+}
+#endif /* !CONFIG_ALL_UNICODE */
 
 /* also used for String.prototype.valueOf */
 static JSValue js_string_toString(JSContext *ctx, JSValueConst this_val,
@@ -51086,11 +51164,26 @@ static void js_array_buffer_finalizer(JSRuntime *rt, JSValue val)
 {
     JSObject *p = JS_VALUE_GET_OBJ(val);
     JSArrayBuffer *abuf = p->u.array_buffer;
+    struct list_head *el, *el1;
+    
     if (abuf) {
         /* The ArrayBuffer finalizer may be called before the typed
            array finalizers using it, so abuf->array_list is not
            necessarily empty. */
-        // assert(list_empty(&abuf->array_list));
+        list_for_each_safe(el, el1, &abuf->array_list) {
+            JSTypedArray *ta;
+            JSObject *p1;
+            
+            ta = list_entry(el, JSTypedArray, link);
+            ta->link.prev = NULL;
+            ta->link.next = NULL;
+            p1 = ta->obj;
+            /* Note: the typed array length and offset fields are not modified */
+            if (p1->class_id != JS_CLASS_DATAVIEW) {
+                p1->u.array.count = 0;
+                p1->u.array.u.ptr = NULL;
+            }
+        }
         if (abuf->shared && rt->sab_funcs.sab_free) {
             rt->sab_funcs.sab_free(rt->sab_funcs.sab_opaque, abuf->data);
         } else {
@@ -53026,7 +53119,7 @@ static void js_typed_array_finalizer(JSRuntime *rt, JSValue val)
     if (ta) {
         /* during the GC the finalizers are called in an arbitrary
            order so the ArrayBuffer finalizer may have been called */
-        if (JS_IsLiveObject(rt, JS_MKPTR(JS_TAG_OBJECT, ta->buffer))) {
+        if (ta->link.next) {
             list_del(&ta->link);
         }
         JS_FreeValueRT(rt, JS_MKPTR(JS_TAG_OBJECT, ta->buffer));
