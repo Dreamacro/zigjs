@@ -1,8 +1,8 @@
 diff --git a/src/vendor/quickjs.c b/src/vendor/quickjs.c
-index 7916013..616b016 100644
+index 223be7b..0e9ca6b 100644
 --- a/src/vendor/quickjs.c
 +++ b/src/vendor/quickjs.c
-@@ -50,7 +50,7 @@
+@@ -48,7 +48,7 @@
  
  #define OPTIMIZE         1
  #define SHORT_OPCODES    1
@@ -11,7 +11,7 @@ index 7916013..616b016 100644
  #define DIRECT_DISPATCH  0
  #else
  #define DIRECT_DISPATCH  1
-@@ -62,18 +62,18 @@
+@@ -60,18 +60,18 @@
  #define MALLOC_OVERHEAD  8
  #endif
  
@@ -33,21 +33,12 @@ index 7916013..616b016 100644
  /* enable stack limitation */
  #define CONFIG_STACK_CHECK
  #endif
-@@ -1680,7 +1680,7 @@ static inline size_t js_def_malloc_usable_size(void *ptr)
+@@ -1694,7 +1694,7 @@ static size_t js_def_malloc_usable_size(const void *ptr)
      return malloc_size(ptr);
  #elif defined(_WIN32)
-     return _msize(ptr);
+     return _msize((void *)ptr);
 -#elif defined(EMSCRIPTEN)
 +#elif defined(EMSCRIPTEN) || defined(__wasi__)
      return 0;
  #elif defined(__linux__)
-     return malloc_usable_size(ptr);
-@@ -1754,7 +1754,7 @@ static const JSMallocFunctions def_malloc_funcs = {
-     malloc_size,
- #elif defined(_WIN32)
-     (size_t (*)(const void *))_msize,
--#elif defined(EMSCRIPTEN)
-+#elif defined(EMSCRIPTEN) || defined(__wasi__)
-     NULL,
- #elif defined(__linux__)
-     (size_t (*)(const void *))malloc_usable_size,
+     return malloc_usable_size((void *)ptr);
