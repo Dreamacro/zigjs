@@ -1,23 +1,23 @@
 const std = @import("std");
 
-fn bindQuickjsLibc(step: *std.build.LibExeObjStep) void {
-    step.addCSourceFiles(&.{
+fn bindQuickjsLibc(step: *std.Build.Step.Compile) void {
+    step.addCSourceFiles(.{ .files = &.{
         "src/vendor/cutils.c",
         "src/vendor/libregexp.c",
         "src/vendor/libunicode.c",
         "src/vendor/libbf.c",
         "src/vendor/quickjs.c",
-    }, &.{
+    }, .flags = &.{
         "-std=gnu99",
         "-funsigned-char",
         "-fno-sanitize=undefined",
-    });
+    } });
     step.defineCMacro("CONFIG_VERSION", "\"2021-03-27\"");
-    step.defineCMacroRaw("CONFIG_BIGNUM");
+    step.defineCMacro("CONFIG_BIGNUM", "1");
     step.linkLibC();
 }
 
-pub fn build(b: *std.build.Builder) void {
+pub fn build(b: *std.Build) void {
     // Standard release options allow the person running `zig build` to select
     // between Debug, ReleaseSafe, ReleaseFast, and ReleaseSmall.
     const optimize = b.standardOptimizeOption(.{});
