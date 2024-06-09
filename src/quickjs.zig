@@ -97,55 +97,96 @@ pub const uint_least64_t = u64;
 pub const int_fast16_t = i16;
 pub const int_fast32_t = i32;
 pub const uint_fast16_t = u16;
-pub const uint_fast32_t = u32; // /usr/lib/zig/libc/include/wasm-wasi-musl/wasi/api.h:33:1: warning: ignoring StaticAssert declaration
+pub const uint_fast32_t = u32;
+// /usr/lib/zig/libc/include/wasm-wasi-musl/wasi/api.h:33:1: warning: ignoring StaticAssert declaration
+
 // /usr/lib/zig/libc/include/wasm-wasi-musl/wasi/api.h:34:1: warning: ignoring StaticAssert declaration
+
 // /usr/lib/zig/libc/include/wasm-wasi-musl/wasi/api.h:35:1: warning: ignoring StaticAssert declaration
+
 // /usr/lib/zig/libc/include/wasm-wasi-musl/wasi/api.h:36:1: warning: ignoring StaticAssert declaration
+
 // /usr/lib/zig/libc/include/wasm-wasi-musl/wasi/api.h:37:1: warning: ignoring StaticAssert declaration
+
 // /usr/lib/zig/libc/include/wasm-wasi-musl/wasi/api.h:38:1: warning: ignoring StaticAssert declaration
+
 // /usr/lib/zig/libc/include/wasm-wasi-musl/wasi/api.h:39:1: warning: ignoring StaticAssert declaration
+
 // /usr/lib/zig/libc/include/wasm-wasi-musl/wasi/api.h:40:1: warning: ignoring StaticAssert declaration
+
 // /usr/lib/zig/libc/include/wasm-wasi-musl/wasi/api.h:41:1: warning: ignoring StaticAssert declaration
-pub const __wasi_size_t = c_ulong; // /usr/lib/zig/libc/include/wasm-wasi-musl/wasi/api.h:51:1: warning: ignoring StaticAssert declaration
+pub const __wasi_size_t = c_ulong;
+// /usr/lib/zig/libc/include/wasm-wasi-musl/wasi/api.h:51:1: warning: ignoring StaticAssert declaration
+
 // /usr/lib/zig/libc/include/wasm-wasi-musl/wasi/api.h:52:1: warning: ignoring StaticAssert declaration
-pub const __wasi_filesize_t = u64; // /usr/lib/zig/libc/include/wasm-wasi-musl/wasi/api.h:59:1: warning: ignoring StaticAssert declaration
+pub const __wasi_filesize_t = u64;
+// /usr/lib/zig/libc/include/wasm-wasi-musl/wasi/api.h:59:1: warning: ignoring StaticAssert declaration
+
 // /usr/lib/zig/libc/include/wasm-wasi-musl/wasi/api.h:60:1: warning: ignoring StaticAssert declaration
-pub const __wasi_timestamp_t = u64; // /usr/lib/zig/libc/include/wasm-wasi-musl/wasi/api.h:67:1: warning: ignoring StaticAssert declaration
+pub const __wasi_timestamp_t = u64;
+// /usr/lib/zig/libc/include/wasm-wasi-musl/wasi/api.h:67:1: warning: ignoring StaticAssert declaration
+
 // /usr/lib/zig/libc/include/wasm-wasi-musl/wasi/api.h:68:1: warning: ignoring StaticAssert declaration
-pub const __wasi_clockid_t = u32; // /usr/lib/zig/libc/include/wasm-wasi-musl/wasi/api.h:99:1: warning: ignoring StaticAssert declaration
+pub const __wasi_clockid_t = u32;
+// /usr/lib/zig/libc/include/wasm-wasi-musl/wasi/api.h:99:1: warning: ignoring StaticAssert declaration
+
 // /usr/lib/zig/libc/include/wasm-wasi-musl/wasi/api.h:100:1: warning: ignoring StaticAssert declaration
-pub const __wasi_errno_t = u16; // /usr/lib/zig/libc/include/wasm-wasi-musl/wasi/api.h:495:1: warning: ignoring StaticAssert declaration
+pub const __wasi_errno_t = u16;
+// /usr/lib/zig/libc/include/wasm-wasi-musl/wasi/api.h:495:1: warning: ignoring StaticAssert declaration
+
 // /usr/lib/zig/libc/include/wasm-wasi-musl/wasi/api.h:496:1: warning: ignoring StaticAssert declaration
 pub const __wasi_rights_t = u64;
-pub const __wasi_fd_t = c_int; // /usr/lib/zig/libc/include/wasm-wasi-musl/wasi/api.h:670:1: warning: ignoring StaticAssert declaration
+pub const __wasi_fd_t = c_int;
+// /usr/lib/zig/libc/include/wasm-wasi-musl/wasi/api.h:670:1: warning: ignoring StaticAssert declaration
+
 // /usr/lib/zig/libc/include/wasm-wasi-musl/wasi/api.h:671:1: warning: ignoring StaticAssert declaration
 pub const struct___wasi_iovec_t = extern struct {
     buf: [*c]u8 = @import("std").mem.zeroes([*c]u8),
     buf_len: __wasi_size_t = @import("std").mem.zeroes(__wasi_size_t),
 };
-pub const __wasi_iovec_t = struct___wasi_iovec_t; // /usr/lib/zig/libc/include/wasm-wasi-musl/wasi/api.h:689:1: warning: ignoring StaticAssert declaration
+pub const __wasi_iovec_t = struct___wasi_iovec_t;
+// /usr/lib/zig/libc/include/wasm-wasi-musl/wasi/api.h:689:1: warning: ignoring StaticAssert declaration
+
 // /usr/lib/zig/libc/include/wasm-wasi-musl/wasi/api.h:690:1: warning: ignoring StaticAssert declaration
+
 // /usr/lib/zig/libc/include/wasm-wasi-musl/wasi/api.h:691:1: warning: ignoring StaticAssert declaration
+
 // /usr/lib/zig/libc/include/wasm-wasi-musl/wasi/api.h:692:1: warning: ignoring StaticAssert declaration
 pub const struct___wasi_ciovec_t = extern struct {
     buf: [*c]const u8 = @import("std").mem.zeroes([*c]const u8),
     buf_len: __wasi_size_t = @import("std").mem.zeroes(__wasi_size_t),
 };
-pub const __wasi_ciovec_t = struct___wasi_ciovec_t; // /usr/lib/zig/libc/include/wasm-wasi-musl/wasi/api.h:710:1: warning: ignoring StaticAssert declaration
+pub const __wasi_ciovec_t = struct___wasi_ciovec_t;
+// /usr/lib/zig/libc/include/wasm-wasi-musl/wasi/api.h:710:1: warning: ignoring StaticAssert declaration
+
 // /usr/lib/zig/libc/include/wasm-wasi-musl/wasi/api.h:711:1: warning: ignoring StaticAssert declaration
+
 // /usr/lib/zig/libc/include/wasm-wasi-musl/wasi/api.h:712:1: warning: ignoring StaticAssert declaration
+
 // /usr/lib/zig/libc/include/wasm-wasi-musl/wasi/api.h:713:1: warning: ignoring StaticAssert declaration
-pub const __wasi_filedelta_t = i64; // /usr/lib/zig/libc/include/wasm-wasi-musl/wasi/api.h:720:1: warning: ignoring StaticAssert declaration
+pub const __wasi_filedelta_t = i64;
+// /usr/lib/zig/libc/include/wasm-wasi-musl/wasi/api.h:720:1: warning: ignoring StaticAssert declaration
+
 // /usr/lib/zig/libc/include/wasm-wasi-musl/wasi/api.h:721:1: warning: ignoring StaticAssert declaration
-pub const __wasi_whence_t = u8; // /usr/lib/zig/libc/include/wasm-wasi-musl/wasi/api.h:743:1: warning: ignoring StaticAssert declaration
+pub const __wasi_whence_t = u8;
+// /usr/lib/zig/libc/include/wasm-wasi-musl/wasi/api.h:743:1: warning: ignoring StaticAssert declaration
+
 // /usr/lib/zig/libc/include/wasm-wasi-musl/wasi/api.h:744:1: warning: ignoring StaticAssert declaration
-pub const __wasi_dircookie_t = u64; // /usr/lib/zig/libc/include/wasm-wasi-musl/wasi/api.h:753:1: warning: ignoring StaticAssert declaration
+pub const __wasi_dircookie_t = u64;
+// /usr/lib/zig/libc/include/wasm-wasi-musl/wasi/api.h:753:1: warning: ignoring StaticAssert declaration
+
 // /usr/lib/zig/libc/include/wasm-wasi-musl/wasi/api.h:754:1: warning: ignoring StaticAssert declaration
-pub const __wasi_dirnamlen_t = u32; // /usr/lib/zig/libc/include/wasm-wasi-musl/wasi/api.h:761:1: warning: ignoring StaticAssert declaration
+pub const __wasi_dirnamlen_t = u32;
+// /usr/lib/zig/libc/include/wasm-wasi-musl/wasi/api.h:761:1: warning: ignoring StaticAssert declaration
+
 // /usr/lib/zig/libc/include/wasm-wasi-musl/wasi/api.h:762:1: warning: ignoring StaticAssert declaration
-pub const __wasi_inode_t = u64; // /usr/lib/zig/libc/include/wasm-wasi-musl/wasi/api.h:769:1: warning: ignoring StaticAssert declaration
+pub const __wasi_inode_t = u64;
+// /usr/lib/zig/libc/include/wasm-wasi-musl/wasi/api.h:769:1: warning: ignoring StaticAssert declaration
+
 // /usr/lib/zig/libc/include/wasm-wasi-musl/wasi/api.h:770:1: warning: ignoring StaticAssert declaration
-pub const __wasi_filetype_t = u8; // /usr/lib/zig/libc/include/wasm-wasi-musl/wasi/api.h:817:1: warning: ignoring StaticAssert declaration
+pub const __wasi_filetype_t = u8;
+// /usr/lib/zig/libc/include/wasm-wasi-musl/wasi/api.h:817:1: warning: ignoring StaticAssert declaration
+
 // /usr/lib/zig/libc/include/wasm-wasi-musl/wasi/api.h:818:1: warning: ignoring StaticAssert declaration
 pub const struct___wasi_dirent_t = extern struct {
     d_next: __wasi_dircookie_t = @import("std").mem.zeroes(__wasi_dircookie_t),
@@ -153,13 +194,21 @@ pub const struct___wasi_dirent_t = extern struct {
     d_namlen: __wasi_dirnamlen_t = @import("std").mem.zeroes(__wasi_dirnamlen_t),
     d_type: __wasi_filetype_t = @import("std").mem.zeroes(__wasi_filetype_t),
 };
-pub const __wasi_dirent_t = struct___wasi_dirent_t; // /usr/lib/zig/libc/include/wasm-wasi-musl/wasi/api.h:846:1: warning: ignoring StaticAssert declaration
+pub const __wasi_dirent_t = struct___wasi_dirent_t;
+// /usr/lib/zig/libc/include/wasm-wasi-musl/wasi/api.h:846:1: warning: ignoring StaticAssert declaration
+
 // /usr/lib/zig/libc/include/wasm-wasi-musl/wasi/api.h:847:1: warning: ignoring StaticAssert declaration
+
 // /usr/lib/zig/libc/include/wasm-wasi-musl/wasi/api.h:848:1: warning: ignoring StaticAssert declaration
+
 // /usr/lib/zig/libc/include/wasm-wasi-musl/wasi/api.h:849:1: warning: ignoring StaticAssert declaration
+
 // /usr/lib/zig/libc/include/wasm-wasi-musl/wasi/api.h:850:1: warning: ignoring StaticAssert declaration
+
 // /usr/lib/zig/libc/include/wasm-wasi-musl/wasi/api.h:851:1: warning: ignoring StaticAssert declaration
-pub const __wasi_advice_t = u8; // /usr/lib/zig/libc/include/wasm-wasi-musl/wasi/api.h:888:1: warning: ignoring StaticAssert declaration
+pub const __wasi_advice_t = u8;
+// /usr/lib/zig/libc/include/wasm-wasi-musl/wasi/api.h:888:1: warning: ignoring StaticAssert declaration
+
 // /usr/lib/zig/libc/include/wasm-wasi-musl/wasi/api.h:889:1: warning: ignoring StaticAssert declaration
 pub const __wasi_fdflags_t = u16;
 pub const struct___wasi_fdstat_t = extern struct {
@@ -168,18 +217,28 @@ pub const struct___wasi_fdstat_t = extern struct {
     fs_rights_base: __wasi_rights_t = @import("std").mem.zeroes(__wasi_rights_t),
     fs_rights_inheriting: __wasi_rights_t = @import("std").mem.zeroes(__wasi_rights_t),
 };
-pub const __wasi_fdstat_t = struct___wasi_fdstat_t; // /usr/lib/zig/libc/include/wasm-wasi-musl/wasi/api.h:950:1: warning: ignoring StaticAssert declaration
+pub const __wasi_fdstat_t = struct___wasi_fdstat_t;
+// /usr/lib/zig/libc/include/wasm-wasi-musl/wasi/api.h:950:1: warning: ignoring StaticAssert declaration
+
 // /usr/lib/zig/libc/include/wasm-wasi-musl/wasi/api.h:951:1: warning: ignoring StaticAssert declaration
+
 // /usr/lib/zig/libc/include/wasm-wasi-musl/wasi/api.h:952:1: warning: ignoring StaticAssert declaration
+
 // /usr/lib/zig/libc/include/wasm-wasi-musl/wasi/api.h:953:1: warning: ignoring StaticAssert declaration
+
 // /usr/lib/zig/libc/include/wasm-wasi-musl/wasi/api.h:954:1: warning: ignoring StaticAssert declaration
+
 // /usr/lib/zig/libc/include/wasm-wasi-musl/wasi/api.h:955:1: warning: ignoring StaticAssert declaration
-pub const __wasi_device_t = u64; // /usr/lib/zig/libc/include/wasm-wasi-musl/wasi/api.h:963:1: warning: ignoring StaticAssert declaration
+pub const __wasi_device_t = u64;
+// /usr/lib/zig/libc/include/wasm-wasi-musl/wasi/api.h:963:1: warning: ignoring StaticAssert declaration
+
 // /usr/lib/zig/libc/include/wasm-wasi-musl/wasi/api.h:964:1: warning: ignoring StaticAssert declaration
 pub const __wasi_fstflags_t = u16;
 pub const __wasi_lookupflags_t = u32;
 pub const __wasi_oflags_t = u16;
-pub const __wasi_linkcount_t = u64; // /usr/lib/zig/libc/include/wasm-wasi-musl/wasi/api.h:1031:1: warning: ignoring StaticAssert declaration
+pub const __wasi_linkcount_t = u64;
+// /usr/lib/zig/libc/include/wasm-wasi-musl/wasi/api.h:1031:1: warning: ignoring StaticAssert declaration
+
 // /usr/lib/zig/libc/include/wasm-wasi-musl/wasi/api.h:1032:1: warning: ignoring StaticAssert declaration
 pub const struct___wasi_filestat_t = extern struct {
     dev: __wasi_device_t = @import("std").mem.zeroes(__wasi_device_t),
@@ -191,28 +250,46 @@ pub const struct___wasi_filestat_t = extern struct {
     mtim: __wasi_timestamp_t = @import("std").mem.zeroes(__wasi_timestamp_t),
     ctim: __wasi_timestamp_t = @import("std").mem.zeroes(__wasi_timestamp_t),
 };
-pub const __wasi_filestat_t = struct___wasi_filestat_t; // /usr/lib/zig/libc/include/wasm-wasi-musl/wasi/api.h:1080:1: warning: ignoring StaticAssert declaration
+pub const __wasi_filestat_t = struct___wasi_filestat_t;
+// /usr/lib/zig/libc/include/wasm-wasi-musl/wasi/api.h:1080:1: warning: ignoring StaticAssert declaration
+
 // /usr/lib/zig/libc/include/wasm-wasi-musl/wasi/api.h:1081:1: warning: ignoring StaticAssert declaration
+
 // /usr/lib/zig/libc/include/wasm-wasi-musl/wasi/api.h:1082:1: warning: ignoring StaticAssert declaration
+
 // /usr/lib/zig/libc/include/wasm-wasi-musl/wasi/api.h:1083:1: warning: ignoring StaticAssert declaration
+
 // /usr/lib/zig/libc/include/wasm-wasi-musl/wasi/api.h:1084:1: warning: ignoring StaticAssert declaration
+
 // /usr/lib/zig/libc/include/wasm-wasi-musl/wasi/api.h:1085:1: warning: ignoring StaticAssert declaration
+
 // /usr/lib/zig/libc/include/wasm-wasi-musl/wasi/api.h:1086:1: warning: ignoring StaticAssert declaration
+
 // /usr/lib/zig/libc/include/wasm-wasi-musl/wasi/api.h:1087:1: warning: ignoring StaticAssert declaration
+
 // /usr/lib/zig/libc/include/wasm-wasi-musl/wasi/api.h:1088:1: warning: ignoring StaticAssert declaration
+
 // /usr/lib/zig/libc/include/wasm-wasi-musl/wasi/api.h:1089:1: warning: ignoring StaticAssert declaration
-pub const __wasi_userdata_t = u64; // /usr/lib/zig/libc/include/wasm-wasi-musl/wasi/api.h:1097:1: warning: ignoring StaticAssert declaration
+pub const __wasi_userdata_t = u64;
+// /usr/lib/zig/libc/include/wasm-wasi-musl/wasi/api.h:1097:1: warning: ignoring StaticAssert declaration
+
 // /usr/lib/zig/libc/include/wasm-wasi-musl/wasi/api.h:1098:1: warning: ignoring StaticAssert declaration
-pub const __wasi_eventtype_t = u8; // /usr/lib/zig/libc/include/wasm-wasi-musl/wasi/api.h:1123:1: warning: ignoring StaticAssert declaration
+pub const __wasi_eventtype_t = u8;
+// /usr/lib/zig/libc/include/wasm-wasi-musl/wasi/api.h:1123:1: warning: ignoring StaticAssert declaration
+
 // /usr/lib/zig/libc/include/wasm-wasi-musl/wasi/api.h:1124:1: warning: ignoring StaticAssert declaration
 pub const __wasi_eventrwflags_t = u16;
 pub const struct___wasi_event_fd_readwrite_t = extern struct {
     nbytes: __wasi_filesize_t = @import("std").mem.zeroes(__wasi_filesize_t),
     flags: __wasi_eventrwflags_t = @import("std").mem.zeroes(__wasi_eventrwflags_t),
 };
-pub const __wasi_event_fd_readwrite_t = struct___wasi_event_fd_readwrite_t; // /usr/lib/zig/libc/include/wasm-wasi-musl/wasi/api.h:1154:1: warning: ignoring StaticAssert declaration
+pub const __wasi_event_fd_readwrite_t = struct___wasi_event_fd_readwrite_t;
+// /usr/lib/zig/libc/include/wasm-wasi-musl/wasi/api.h:1154:1: warning: ignoring StaticAssert declaration
+
 // /usr/lib/zig/libc/include/wasm-wasi-musl/wasi/api.h:1155:1: warning: ignoring StaticAssert declaration
+
 // /usr/lib/zig/libc/include/wasm-wasi-musl/wasi/api.h:1156:1: warning: ignoring StaticAssert declaration
+
 // /usr/lib/zig/libc/include/wasm-wasi-musl/wasi/api.h:1157:1: warning: ignoring StaticAssert declaration
 pub const struct___wasi_event_t = extern struct {
     userdata: __wasi_userdata_t = @import("std").mem.zeroes(__wasi_userdata_t),
@@ -220,11 +297,17 @@ pub const struct___wasi_event_t = extern struct {
     type: __wasi_eventtype_t = @import("std").mem.zeroes(__wasi_eventtype_t),
     fd_readwrite: __wasi_event_fd_readwrite_t = @import("std").mem.zeroes(__wasi_event_fd_readwrite_t),
 };
-pub const __wasi_event_t = struct___wasi_event_t; // /usr/lib/zig/libc/include/wasm-wasi-musl/wasi/api.h:1186:1: warning: ignoring StaticAssert declaration
+pub const __wasi_event_t = struct___wasi_event_t;
+// /usr/lib/zig/libc/include/wasm-wasi-musl/wasi/api.h:1186:1: warning: ignoring StaticAssert declaration
+
 // /usr/lib/zig/libc/include/wasm-wasi-musl/wasi/api.h:1187:1: warning: ignoring StaticAssert declaration
+
 // /usr/lib/zig/libc/include/wasm-wasi-musl/wasi/api.h:1188:1: warning: ignoring StaticAssert declaration
+
 // /usr/lib/zig/libc/include/wasm-wasi-musl/wasi/api.h:1189:1: warning: ignoring StaticAssert declaration
+
 // /usr/lib/zig/libc/include/wasm-wasi-musl/wasi/api.h:1190:1: warning: ignoring StaticAssert declaration
+
 // /usr/lib/zig/libc/include/wasm-wasi-musl/wasi/api.h:1191:1: warning: ignoring StaticAssert declaration
 pub const __wasi_subclockflags_t = u16;
 pub const struct___wasi_subscription_clock_t = extern struct {
@@ -233,17 +316,26 @@ pub const struct___wasi_subscription_clock_t = extern struct {
     precision: __wasi_timestamp_t = @import("std").mem.zeroes(__wasi_timestamp_t),
     flags: __wasi_subclockflags_t = @import("std").mem.zeroes(__wasi_subclockflags_t),
 };
-pub const __wasi_subscription_clock_t = struct___wasi_subscription_clock_t; // /usr/lib/zig/libc/include/wasm-wasi-musl/wasi/api.h:1235:1: warning: ignoring StaticAssert declaration
+pub const __wasi_subscription_clock_t = struct___wasi_subscription_clock_t;
+// /usr/lib/zig/libc/include/wasm-wasi-musl/wasi/api.h:1235:1: warning: ignoring StaticAssert declaration
+
 // /usr/lib/zig/libc/include/wasm-wasi-musl/wasi/api.h:1236:1: warning: ignoring StaticAssert declaration
+
 // /usr/lib/zig/libc/include/wasm-wasi-musl/wasi/api.h:1237:1: warning: ignoring StaticAssert declaration
+
 // /usr/lib/zig/libc/include/wasm-wasi-musl/wasi/api.h:1238:1: warning: ignoring StaticAssert declaration
+
 // /usr/lib/zig/libc/include/wasm-wasi-musl/wasi/api.h:1239:1: warning: ignoring StaticAssert declaration
+
 // /usr/lib/zig/libc/include/wasm-wasi-musl/wasi/api.h:1240:1: warning: ignoring StaticAssert declaration
 pub const struct___wasi_subscription_fd_readwrite_t = extern struct {
     file_descriptor: __wasi_fd_t = @import("std").mem.zeroes(__wasi_fd_t),
 };
-pub const __wasi_subscription_fd_readwrite_t = struct___wasi_subscription_fd_readwrite_t; // /usr/lib/zig/libc/include/wasm-wasi-musl/wasi/api.h:1254:1: warning: ignoring StaticAssert declaration
+pub const __wasi_subscription_fd_readwrite_t = struct___wasi_subscription_fd_readwrite_t;
+// /usr/lib/zig/libc/include/wasm-wasi-musl/wasi/api.h:1254:1: warning: ignoring StaticAssert declaration
+
 // /usr/lib/zig/libc/include/wasm-wasi-musl/wasi/api.h:1255:1: warning: ignoring StaticAssert declaration
+
 // /usr/lib/zig/libc/include/wasm-wasi-musl/wasi/api.h:1256:1: warning: ignoring StaticAssert declaration
 pub const union___wasi_subscription_u_u_t = extern union {
     clock: __wasi_subscription_clock_t,
@@ -255,30 +347,45 @@ pub const struct___wasi_subscription_u_t = extern struct {
     tag: u8 = @import("std").mem.zeroes(u8),
     u: __wasi_subscription_u_u_t = @import("std").mem.zeroes(__wasi_subscription_u_u_t),
 };
-pub const __wasi_subscription_u_t = struct___wasi_subscription_u_t; // /usr/lib/zig/libc/include/wasm-wasi-musl/wasi/api.h:1271:1: warning: ignoring StaticAssert declaration
+pub const __wasi_subscription_u_t = struct___wasi_subscription_u_t;
+// /usr/lib/zig/libc/include/wasm-wasi-musl/wasi/api.h:1271:1: warning: ignoring StaticAssert declaration
+
 // /usr/lib/zig/libc/include/wasm-wasi-musl/wasi/api.h:1272:1: warning: ignoring StaticAssert declaration
 pub const struct___wasi_subscription_t = extern struct {
     userdata: __wasi_userdata_t = @import("std").mem.zeroes(__wasi_userdata_t),
     u: __wasi_subscription_u_t = @import("std").mem.zeroes(__wasi_subscription_u_t),
 };
-pub const __wasi_subscription_t = struct___wasi_subscription_t; // /usr/lib/zig/libc/include/wasm-wasi-musl/wasi/api.h:1291:1: warning: ignoring StaticAssert declaration
+pub const __wasi_subscription_t = struct___wasi_subscription_t;
+// /usr/lib/zig/libc/include/wasm-wasi-musl/wasi/api.h:1291:1: warning: ignoring StaticAssert declaration
+
 // /usr/lib/zig/libc/include/wasm-wasi-musl/wasi/api.h:1292:1: warning: ignoring StaticAssert declaration
+
 // /usr/lib/zig/libc/include/wasm-wasi-musl/wasi/api.h:1293:1: warning: ignoring StaticAssert declaration
+
 // /usr/lib/zig/libc/include/wasm-wasi-musl/wasi/api.h:1294:1: warning: ignoring StaticAssert declaration
-pub const __wasi_exitcode_t = u32; // /usr/lib/zig/libc/include/wasm-wasi-musl/wasi/api.h:1301:1: warning: ignoring StaticAssert declaration
+pub const __wasi_exitcode_t = u32;
+// /usr/lib/zig/libc/include/wasm-wasi-musl/wasi/api.h:1301:1: warning: ignoring StaticAssert declaration
+
 // /usr/lib/zig/libc/include/wasm-wasi-musl/wasi/api.h:1302:1: warning: ignoring StaticAssert declaration
 pub const __wasi_riflags_t = u16;
 pub const __wasi_roflags_t = u16;
-pub const __wasi_siflags_t = u16; // /usr/lib/zig/libc/include/wasm-wasi-musl/wasi/api.h:1335:1: warning: ignoring StaticAssert declaration
+pub const __wasi_siflags_t = u16;
+// /usr/lib/zig/libc/include/wasm-wasi-musl/wasi/api.h:1335:1: warning: ignoring StaticAssert declaration
+
 // /usr/lib/zig/libc/include/wasm-wasi-musl/wasi/api.h:1336:1: warning: ignoring StaticAssert declaration
 pub const __wasi_sdflags_t = u8;
-pub const __wasi_preopentype_t = u8; // /usr/lib/zig/libc/include/wasm-wasi-musl/wasi/api.h:1363:1: warning: ignoring StaticAssert declaration
+pub const __wasi_preopentype_t = u8;
+// /usr/lib/zig/libc/include/wasm-wasi-musl/wasi/api.h:1363:1: warning: ignoring StaticAssert declaration
+
 // /usr/lib/zig/libc/include/wasm-wasi-musl/wasi/api.h:1364:1: warning: ignoring StaticAssert declaration
 pub const struct___wasi_prestat_dir_t = extern struct {
     pr_name_len: __wasi_size_t = @import("std").mem.zeroes(__wasi_size_t),
 };
-pub const __wasi_prestat_dir_t = struct___wasi_prestat_dir_t; // /usr/lib/zig/libc/include/wasm-wasi-musl/wasi/api.h:1377:1: warning: ignoring StaticAssert declaration
+pub const __wasi_prestat_dir_t = struct___wasi_prestat_dir_t;
+// /usr/lib/zig/libc/include/wasm-wasi-musl/wasi/api.h:1377:1: warning: ignoring StaticAssert declaration
+
 // /usr/lib/zig/libc/include/wasm-wasi-musl/wasi/api.h:1378:1: warning: ignoring StaticAssert declaration
+
 // /usr/lib/zig/libc/include/wasm-wasi-musl/wasi/api.h:1379:1: warning: ignoring StaticAssert declaration
 pub const union___wasi_prestat_u_t = extern union {
     dir: __wasi_prestat_dir_t,
@@ -288,7 +395,9 @@ pub const struct___wasi_prestat_t = extern struct {
     tag: u8 = @import("std").mem.zeroes(u8),
     u: __wasi_prestat_u_t = @import("std").mem.zeroes(__wasi_prestat_u_t),
 };
-pub const __wasi_prestat_t = struct___wasi_prestat_t; // /usr/lib/zig/libc/include/wasm-wasi-musl/wasi/api.h:1392:1: warning: ignoring StaticAssert declaration
+pub const __wasi_prestat_t = struct___wasi_prestat_t;
+// /usr/lib/zig/libc/include/wasm-wasi-musl/wasi/api.h:1392:1: warning: ignoring StaticAssert declaration
+
 // /usr/lib/zig/libc/include/wasm-wasi-musl/wasi/api.h:1393:1: warning: ignoring StaticAssert declaration
 pub extern fn __wasi_args_get(argv: [*c][*c]u8, argv_buf: [*c]u8) __wasi_errno_t;
 pub extern fn __wasi_args_sizes_get(retptr0: [*c]__wasi_size_t, retptr1: [*c]__wasi_size_t) __wasi_errno_t;
@@ -655,6 +764,7 @@ pub const struct_JSClassDef = extern struct {
 };
 pub const JSClassDef = struct_JSClassDef;
 pub extern fn JS_NewClassID(pclass_id: [*c]JSClassID) JSClassID;
+pub extern fn JS_GetClassID(v: JSValue) JSClassID;
 pub extern fn JS_NewClass(rt: ?*JSRuntime, class_id: JSClassID, class_def: [*c]const JSClassDef) c_int;
 pub extern fn JS_IsRegisteredClass(rt: ?*JSRuntime, class_id: JSClassID) c_int;
 pub inline fn JS_NewBool(arg_ctx: ?*JSContext, arg_val: c_int) JSValue {
@@ -713,8 +823,6 @@ pub inline fn JS_NewFloat64(arg_ctx: ?*JSContext, arg_d: f64) JSValue {
     _ = &ctx;
     var d = arg_d;
     _ = &d;
-    var v: JSValue = undefined;
-    _ = &v;
     var val: i32 = undefined;
     _ = &val;
     const union_unnamed_4 = extern union {
@@ -726,15 +834,13 @@ pub inline fn JS_NewFloat64(arg_ctx: ?*JSContext, arg_d: f64) JSValue {
     _ = &u;
     var t: union_unnamed_4 = undefined;
     _ = &t;
-    u.d = d;
-    val = @as(i32, @intFromFloat(d));
-    t.d = @as(f64, @floatFromInt(val));
-    if (u.u == t.u) {
-        v = (@as(u64, @bitCast(@as(c_longlong, JS_TAG_INT))) << @intCast(32)) | @as(u64, @bitCast(@as(c_ulonglong, @as(u32, @bitCast(val)))));
-    } else {
-        v = __JS_NewFloat64(ctx, d);
+    if ((d >= @as(f64, @floatFromInt(-@as(c_int, 1) - @as(c_int, 2147483647)))) and (d <= @as(f64, @floatFromInt(@as(c_int, 2147483647))))) {
+        u.d = d;
+        val = @as(i32, @intFromFloat(d));
+        t.d = @as(f64, @floatFromInt(val));
+        if (u.u == t.u) return (@as(u64, @bitCast(@as(c_longlong, JS_TAG_INT))) << @intCast(32)) | @as(u64, @bitCast(@as(c_ulonglong, @as(u32, @bitCast(val)))));
     }
-    return v;
+    return __JS_NewFloat64(ctx, d);
 }
 pub fn JS_IsNumber(arg_v: JSValue) callconv(.C) c_int {
     var v = arg_v;
@@ -808,7 +914,9 @@ pub fn JS_IsObject(arg_v: JSValue) callconv(.C) c_int {
 }
 pub extern fn JS_Throw(ctx: ?*JSContext, obj: JSValue) JSValue;
 pub extern fn JS_GetException(ctx: ?*JSContext) JSValue;
+pub extern fn JS_HasException(ctx: ?*JSContext) c_int;
 pub extern fn JS_IsError(ctx: ?*JSContext, val: JSValue) c_int;
+pub extern fn JS_SetUncatchableError(ctx: ?*JSContext, val: JSValue, flag: c_int) void;
 pub extern fn JS_ResetUncatchableError(ctx: ?*JSContext) void;
 pub extern fn JS_NewError(ctx: ?*JSContext) JSValue;
 pub extern fn JS_ThrowSyntaxError(ctx: ?*JSContext, fmt: [*c]const u8, ...) JSValue;
@@ -877,6 +985,9 @@ pub fn JS_DupValueRT(arg_rt: ?*JSRuntime, arg_v: JSValue) callconv(.C) JSValue {
     }
     return v;
 }
+pub extern fn JS_StrictEq(ctx: ?*JSContext, op1: JSValue, op2: JSValue) c_int;
+pub extern fn JS_SameValue(ctx: ?*JSContext, op1: JSValue, op2: JSValue) c_int;
+pub extern fn JS_SameValueZero(ctx: ?*JSContext, op1: JSValue, op2: JSValue) c_int;
 pub extern fn JS_ToBool(ctx: ?*JSContext, val: JSValue) c_int;
 pub extern fn JS_ToInt32(ctx: ?*JSContext, pres: [*c]i32, val: JSValue) c_int;
 pub fn JS_ToUint32(arg_ctx: ?*JSContext, arg_pres: [*c]u32, arg_val: JSValue) callconv(.C) c_int {
@@ -925,6 +1036,7 @@ pub extern fn JS_IsConstructor(ctx: ?*JSContext, val: JSValue) c_int;
 pub extern fn JS_SetConstructorBit(ctx: ?*JSContext, func_obj: JSValue, val: c_int) c_int;
 pub extern fn JS_NewArray(ctx: ?*JSContext) JSValue;
 pub extern fn JS_IsArray(ctx: ?*JSContext, val: JSValue) c_int;
+pub extern fn JS_NewDate(ctx: ?*JSContext, epoch_ms: f64) JSValue;
 pub extern fn JS_GetPropertyInternal(ctx: ?*JSContext, obj: JSValue, prop: JSAtom, receiver: JSValue, throw_ref_error: c_int) JSValue;
 pub inline fn JS_GetProperty(arg_ctx: ?*JSContext, arg_this_obj: JSValue, arg_prop: JSAtom) JSValue {
     var ctx = arg_ctx;
@@ -985,6 +1097,20 @@ pub extern fn JS_NewArrayBuffer(ctx: ?*JSContext, buf: [*c]u8, len: usize, free_
 pub extern fn JS_NewArrayBufferCopy(ctx: ?*JSContext, buf: [*c]const u8, len: usize) JSValue;
 pub extern fn JS_DetachArrayBuffer(ctx: ?*JSContext, obj: JSValue) void;
 pub extern fn JS_GetArrayBuffer(ctx: ?*JSContext, psize: [*c]usize, obj: JSValue) [*c]u8;
+pub const JS_TYPED_ARRAY_UINT8C: c_int = 0;
+pub const JS_TYPED_ARRAY_INT8: c_int = 1;
+pub const JS_TYPED_ARRAY_UINT8: c_int = 2;
+pub const JS_TYPED_ARRAY_INT16: c_int = 3;
+pub const JS_TYPED_ARRAY_UINT16: c_int = 4;
+pub const JS_TYPED_ARRAY_INT32: c_int = 5;
+pub const JS_TYPED_ARRAY_UINT32: c_int = 6;
+pub const JS_TYPED_ARRAY_BIG_INT64: c_int = 7;
+pub const JS_TYPED_ARRAY_BIG_UINT64: c_int = 8;
+pub const JS_TYPED_ARRAY_FLOAT32: c_int = 9;
+pub const JS_TYPED_ARRAY_FLOAT64: c_int = 10;
+pub const enum_JSTypedArrayEnum = c_uint;
+pub const JSTypedArrayEnum = enum_JSTypedArrayEnum;
+pub extern fn JS_NewTypedArray(ctx: ?*JSContext, argc: c_int, argv: [*c]JSValue, array_type: JSTypedArrayEnum) JSValue;
 pub extern fn JS_GetTypedArrayBuffer(ctx: ?*JSContext, obj: JSValue, pbyte_offset: [*c]usize, pbyte_length: [*c]usize, pbytes_per_element: [*c]usize) JSValue;
 pub const JSSharedArrayBufferFunctions = extern struct {
     sab_alloc: ?*const fn (?*anyopaque, usize) callconv(.C) ?*anyopaque = @import("std").mem.zeroes(?*const fn (?*anyopaque, usize) callconv(.C) ?*anyopaque),
@@ -1127,40 +1253,12 @@ pub extern fn JS_AddModuleExport(ctx: ?*JSContext, m: ?*JSModuleDef, name_str: [
 pub extern fn JS_AddModuleExportList(ctx: ?*JSContext, m: ?*JSModuleDef, tab: [*c]const JSCFunctionListEntry, len: c_int) c_int;
 pub extern fn JS_SetModuleExport(ctx: ?*JSContext, m: ?*JSModuleDef, export_name: [*c]const u8, val: JSValue) c_int;
 pub extern fn JS_SetModuleExportList(ctx: ?*JSContext, m: ?*JSModuleDef, tab: [*c]const JSCFunctionListEntry, len: c_int) c_int;
-pub const __INTMAX_C_SUFFIX__ = @compileError("unable to translate macro: undefined identifier `LL`"); // (no file):90:9
-pub const __UINTMAX_C_SUFFIX__ = @compileError("unable to translate macro: undefined identifier `ULL`"); // (no file):96:9
-pub const __INT64_C_SUFFIX__ = @compileError("unable to translate macro: undefined identifier `LL`"); // (no file):178:9
-pub const __UINT32_C_SUFFIX__ = @compileError("unable to translate macro: undefined identifier `U`"); // (no file):200:9
-pub const __UINT64_C_SUFFIX__ = @compileError("unable to translate macro: undefined identifier `ULL`"); // (no file):208:9
-pub const __restrict = @compileError("unable to translate C expr: unexpected token 'restrict'"); // /usr/lib/zig/libc/include/wasm-wasi-musl/features.h:20:9
-pub const __inline = @compileError("unable to translate C expr: unexpected token 'inline'"); // /usr/lib/zig/libc/include/wasm-wasi-musl/features.h:26:9
-pub const __REDIR = @compileError("unable to translate C expr: unexpected token '__typeof__'"); // /usr/lib/zig/libc/include/wasm-wasi-musl/features.h:38:9
-pub const offsetof = @compileError("unable to translate C expr: unexpected token 'an identifier'"); // /usr/lib/zig/include/stddef.h:116:9
-pub const js_force_inline = @compileError("unable to translate macro: undefined identifier `always_inline`"); // ./src/vendor/quickjs.h:38:9
-pub const __js_printf_like = @compileError("unable to translate macro: undefined identifier `format`"); // ./src/vendor/quickjs.h:39:9
-pub const JS_PTR64_DEF = @compileError("unable to translate C expr: unexpected token ''"); // ./src/vendor/quickjs.h:60:9
-pub const JS_FLOAT64_NAN = @compileError("unable to translate macro: undefined identifier `NAN`"); // ./src/vendor/quickjs.h:94:9
-pub const JS_VALUE_GET_STRING = @compileError("unable to translate macro: undefined identifier `JSString`"); // ./src/vendor/quickjs.h:251:9
-pub const JS_CFUNC_DEF = @compileError("unable to translate C expr: unexpected token '{'"); // ./src/vendor/quickjs.h:1019:9
-pub const JS_CFUNC_MAGIC_DEF = @compileError("unable to translate C expr: unexpected token '{'"); // ./src/vendor/quickjs.h:1020:9
-pub const JS_CFUNC_SPECIAL_DEF = @compileError("unable to translate macro: undefined identifier `JS_CFUNC_`"); // ./src/vendor/quickjs.h:1021:9
-pub const JS_ITERATOR_NEXT_DEF = @compileError("unable to translate C expr: unexpected token '{'"); // ./src/vendor/quickjs.h:1022:9
-pub const JS_CGETSET_DEF = @compileError("unable to translate C expr: unexpected token '{'"); // ./src/vendor/quickjs.h:1023:9
-pub const JS_CGETSET_MAGIC_DEF = @compileError("unable to translate C expr: unexpected token '{'"); // ./src/vendor/quickjs.h:1024:9
-pub const JS_PROP_STRING_DEF = @compileError("unable to translate C expr: unexpected token '{'"); // ./src/vendor/quickjs.h:1025:9
-pub const JS_PROP_INT32_DEF = @compileError("unable to translate C expr: unexpected token '{'"); // ./src/vendor/quickjs.h:1026:9
-pub const JS_PROP_INT64_DEF = @compileError("unable to translate C expr: unexpected token '{'"); // ./src/vendor/quickjs.h:1027:9
-pub const JS_PROP_DOUBLE_DEF = @compileError("unable to translate C expr: unexpected token '{'"); // ./src/vendor/quickjs.h:1028:9
-pub const JS_PROP_UNDEFINED_DEF = @compileError("unable to translate C expr: unexpected token '{'"); // ./src/vendor/quickjs.h:1029:9
-pub const JS_OBJECT_DEF = @compileError("unable to translate C expr: unexpected token '{'"); // ./src/vendor/quickjs.h:1030:9
-pub const JS_ALIAS_DEF = @compileError("unable to translate C expr: unexpected token '{'"); // ./src/vendor/quickjs.h:1031:9
-pub const JS_ALIAS_BASE_DEF = @compileError("unable to translate C expr: unexpected token '{'"); // ./src/vendor/quickjs.h:1032:9
 pub const __llvm__ = @as(c_int, 1);
 pub const __clang__ = @as(c_int, 1);
-pub const __clang_major__ = @as(c_int, 17);
-pub const __clang_minor__ = @as(c_int, 0);
+pub const __clang_major__ = @as(c_int, 18);
+pub const __clang_minor__ = @as(c_int, 1);
 pub const __clang_patchlevel__ = @as(c_int, 6);
-pub const __clang_version__ = "17.0.6 ";
+pub const __clang_version__ = "18.1.6 ";
 pub const __GNUC__ = @as(c_int, 4);
 pub const __GNUC_MINOR__ = @as(c_int, 2);
 pub const __GNUC_PATCHLEVEL__ = @as(c_int, 1);
@@ -1171,6 +1269,11 @@ pub const __ATOMIC_ACQUIRE = @as(c_int, 2);
 pub const __ATOMIC_RELEASE = @as(c_int, 3);
 pub const __ATOMIC_ACQ_REL = @as(c_int, 4);
 pub const __ATOMIC_SEQ_CST = @as(c_int, 5);
+pub const __MEMORY_SCOPE_SYSTEM = @as(c_int, 0);
+pub const __MEMORY_SCOPE_DEVICE = @as(c_int, 1);
+pub const __MEMORY_SCOPE_WRKGRP = @as(c_int, 2);
+pub const __MEMORY_SCOPE_WVFRNT = @as(c_int, 3);
+pub const __MEMORY_SCOPE_SINGLE = @as(c_int, 4);
 pub const __OPENCL_MEMORY_SCOPE_WORK_ITEM = @as(c_int, 0);
 pub const __OPENCL_MEMORY_SCOPE_WORK_GROUP = @as(c_int, 1);
 pub const __OPENCL_MEMORY_SCOPE_DEVICE = @as(c_int, 2);
@@ -1187,7 +1290,7 @@ pub const __FPCLASS_POSSUBNORMAL = @as(c_int, 0x0080);
 pub const __FPCLASS_POSNORMAL = @as(c_int, 0x0100);
 pub const __FPCLASS_POSINF = @as(c_int, 0x0200);
 pub const __PRAGMA_REDEFINE_EXTNAME = @as(c_int, 1);
-pub const __VERSION__ = "Alpine Clang 17.0.6";
+pub const __VERSION__ = "Alpine Clang 18.1.6";
 pub const __OBJC_BOOL_IS_BOOL = @as(c_int, 0);
 pub const __CONSTANT_CFSTRINGS__ = @as(c_int, 1);
 pub const __clang_literal_encoding__ = "UTF-8";
@@ -1243,11 +1346,15 @@ pub const __SIZEOF_INT128__ = @as(c_int, 16);
 pub const __INTMAX_TYPE__ = c_longlong;
 pub const __INTMAX_FMTd__ = "lld";
 pub const __INTMAX_FMTi__ = "lli";
+pub const __INTMAX_C_SUFFIX__ = @compileError("unable to translate macro: undefined identifier `LL`");
+// (no file):95:9
 pub const __UINTMAX_TYPE__ = c_ulonglong;
 pub const __UINTMAX_FMTo__ = "llo";
 pub const __UINTMAX_FMTu__ = "llu";
 pub const __UINTMAX_FMTx__ = "llx";
 pub const __UINTMAX_FMTX__ = "llX";
+pub const __UINTMAX_C_SUFFIX__ = @compileError("unable to translate macro: undefined identifier `ULL`");
+// (no file):101:9
 pub const __PTRDIFF_TYPE__ = c_long;
 pub const __PTRDIFF_FMTd__ = "ld";
 pub const __PTRDIFF_FMTi__ = "li";
@@ -1329,6 +1436,8 @@ pub const __INT32_C_SUFFIX__ = "";
 pub const __INT64_TYPE__ = c_longlong;
 pub const __INT64_FMTd__ = "lld";
 pub const __INT64_FMTi__ = "lli";
+pub const __INT64_C_SUFFIX__ = @compileError("unable to translate macro: undefined identifier `LL`");
+// (no file):183:9
 pub const __UINT8_TYPE__ = u8;
 pub const __UINT8_FMTo__ = "hho";
 pub const __UINT8_FMTu__ = "hhu";
@@ -1350,6 +1459,8 @@ pub const __UINT32_FMTo__ = "o";
 pub const __UINT32_FMTu__ = "u";
 pub const __UINT32_FMTx__ = "x";
 pub const __UINT32_FMTX__ = "X";
+pub const __UINT32_C_SUFFIX__ = @compileError("unable to translate macro: undefined identifier `U`");
+// (no file):205:9
 pub const __UINT32_MAX__ = @import("std").zig.c_translation.promoteIntLiteral(c_uint, 4294967295, .decimal);
 pub const __INT32_MAX__ = @import("std").zig.c_translation.promoteIntLiteral(c_int, 2147483647, .decimal);
 pub const __UINT64_TYPE__ = c_ulonglong;
@@ -1357,6 +1468,8 @@ pub const __UINT64_FMTo__ = "llo";
 pub const __UINT64_FMTu__ = "llu";
 pub const __UINT64_FMTx__ = "llx";
 pub const __UINT64_FMTX__ = "llX";
+pub const __UINT64_C_SUFFIX__ = @compileError("unable to translate macro: undefined identifier `ULL`");
+// (no file):213:9
 pub const __UINT64_MAX__ = @as(c_ulonglong, 18446744073709551615);
 pub const __INT64_MAX__ = @as(c_longlong, 9223372036854775807);
 pub const __INT_LEAST8_TYPE__ = i8;
@@ -1500,6 +1613,12 @@ pub const _STDIO_H = "";
 pub const _FEATURES_H = "";
 pub const _BSD_SOURCE = @as(c_int, 1);
 pub const _XOPEN_SOURCE = @as(c_int, 700);
+pub const __restrict = @compileError("unable to translate C expr: unexpected token 'restrict'");
+// /usr/lib/zig/libc/include/wasm-wasi-musl/features.h:20:9
+pub const __inline = @compileError("unable to translate C expr: unexpected token 'inline'");
+// /usr/lib/zig/libc/include/wasm-wasi-musl/features.h:26:9
+pub const __REDIR = @compileError("unable to translate C expr: unexpected token '__typeof__'");
+// /usr/lib/zig/libc/include/wasm-wasi-musl/features.h:38:9
 pub const __NEED_FILE = "";
 pub const __NEED___isoc_va_list = "";
 pub const __NEED_size_t = "";
@@ -1535,10 +1654,13 @@ pub const __wasi_api_h = "";
 pub const __STDDEF_H = "";
 pub const __need_ptrdiff_t = "";
 pub const __need_wchar_t = "";
-pub const __need_STDDEF_H_misc = "";
+pub const __need_max_align_t = "";
+pub const __need_offsetof = "";
 pub const _PTRDIFF_T = "";
 pub const _WCHAR_T = "";
 pub const __CLANG_MAX_ALIGN_T_DEFINED = "";
+pub const offsetof = @compileError("unable to translate C expr: unexpected token 'an identifier'");
+// /usr/lib/zig/include/__stddef_offsetof.h:16:9
 pub const __CLANG_STDINT_H = "";
 pub const _STDINT_H = "";
 pub const __NEED_int8_t = "";
@@ -1814,8 +1936,16 @@ pub inline fn js_unlikely(x: anytype) @TypeOf(__builtin_expect(!!(x != 0), @as(c
     _ = &x;
     return __builtin_expect(!!(x != 0), @as(c_int, 0));
 }
+pub const js_force_inline = @compileError("unable to translate macro: undefined identifier `always_inline`");
+// ./src/vendor/quickjs.h:38:9
+pub const __js_printf_like = @compileError("unable to translate macro: undefined identifier `format`");
+// ./src/vendor/quickjs.h:39:9
 pub const JS_BOOL = c_int;
+pub const JS_PTR64_DEF = @compileError("unable to translate C expr: unexpected token ''");
+// ./src/vendor/quickjs.h:60:9
 pub const JS_NAN_BOXING = "";
+pub const JS_FLOAT64_NAN = @compileError("unable to translate macro: undefined identifier `NAN`");
+// ./src/vendor/quickjs.h:94:9
 pub const JSValueConst = JSValue;
 pub inline fn JS_VALUE_GET_TAG(v: anytype) c_int {
     _ = &v;
@@ -1863,6 +1993,8 @@ pub inline fn JS_VALUE_GET_OBJ(v: anytype) [*c]JSObject {
     _ = &v;
     return @import("std").zig.c_translation.cast([*c]JSObject, JS_VALUE_GET_PTR(v));
 }
+pub const JS_VALUE_GET_STRING = @compileError("unable to translate macro: undefined identifier `JSString`");
+// ./src/vendor/quickjs.h:251:9
 pub inline fn JS_VALUE_HAS_REF_COUNT(v: anytype) @TypeOf(@import("std").zig.c_translation.cast(c_uint, JS_VALUE_GET_TAG(v)) >= @import("std").zig.c_translation.cast(c_uint, JS_TAG_FIRST)) {
     _ = &v;
     return @import("std").zig.c_translation.cast(c_uint, JS_VALUE_GET_TAG(v)) >= @import("std").zig.c_translation.cast(c_uint, JS_TAG_FIRST);
@@ -1907,6 +2039,7 @@ pub const JS_EVAL_FLAG_BACKTRACE_BARRIER = @as(c_int, 1) << @as(c_int, 6);
 pub const JS_EVAL_FLAG_ASYNC = @as(c_int, 1) << @as(c_int, 7);
 pub const JS_ATOM_NULL = @as(c_int, 0);
 pub const JS_CALL_FLAG_CONSTRUCTOR = @as(c_int, 1) << @as(c_int, 0);
+pub const JS_INVALID_CLASS_ID = @as(c_int, 0);
 pub const JS_GPN_STRING_MASK = @as(c_int, 1) << @as(c_int, 0);
 pub const JS_GPN_SYMBOL_MASK = @as(c_int, 1) << @as(c_int, 1);
 pub const JS_GPN_PRIVATE_MASK = @as(c_int, 1) << @as(c_int, 2);
@@ -1931,6 +2064,34 @@ pub const JS_DEF_PROP_DOUBLE = @as(c_int, 6);
 pub const JS_DEF_PROP_UNDEFINED = @as(c_int, 7);
 pub const JS_DEF_OBJECT = @as(c_int, 8);
 pub const JS_DEF_ALIAS = @as(c_int, 9);
+pub const JS_CFUNC_DEF = @compileError("unable to translate C expr: unexpected token '{'");
+// ./src/vendor/quickjs.h:1045:9
+pub const JS_CFUNC_MAGIC_DEF = @compileError("unable to translate C expr: unexpected token '{'");
+// ./src/vendor/quickjs.h:1046:9
+pub const JS_CFUNC_SPECIAL_DEF = @compileError("unable to translate macro: undefined identifier `JS_CFUNC_`");
+// ./src/vendor/quickjs.h:1047:9
+pub const JS_ITERATOR_NEXT_DEF = @compileError("unable to translate C expr: unexpected token '{'");
+// ./src/vendor/quickjs.h:1048:9
+pub const JS_CGETSET_DEF = @compileError("unable to translate C expr: unexpected token '{'");
+// ./src/vendor/quickjs.h:1049:9
+pub const JS_CGETSET_MAGIC_DEF = @compileError("unable to translate C expr: unexpected token '{'");
+// ./src/vendor/quickjs.h:1050:9
+pub const JS_PROP_STRING_DEF = @compileError("unable to translate C expr: unexpected token '{'");
+// ./src/vendor/quickjs.h:1051:9
+pub const JS_PROP_INT32_DEF = @compileError("unable to translate C expr: unexpected token '{'");
+// ./src/vendor/quickjs.h:1052:9
+pub const JS_PROP_INT64_DEF = @compileError("unable to translate C expr: unexpected token '{'");
+// ./src/vendor/quickjs.h:1053:9
+pub const JS_PROP_DOUBLE_DEF = @compileError("unable to translate C expr: unexpected token '{'");
+// ./src/vendor/quickjs.h:1054:9
+pub const JS_PROP_UNDEFINED_DEF = @compileError("unable to translate C expr: unexpected token '{'");
+// ./src/vendor/quickjs.h:1055:9
+pub const JS_OBJECT_DEF = @compileError("unable to translate C expr: unexpected token '{'");
+// ./src/vendor/quickjs.h:1056:9
+pub const JS_ALIAS_DEF = @compileError("unable to translate C expr: unexpected token '{'");
+// ./src/vendor/quickjs.h:1057:9
+pub const JS_ALIAS_BASE_DEF = @compileError("unable to translate C expr: unexpected token '{'");
+// ./src/vendor/quickjs.h:1058:9
 pub const timeval = struct_timeval;
 pub const timespec = struct_timespec;
 pub const _IO_FILE = struct__IO_FILE;
