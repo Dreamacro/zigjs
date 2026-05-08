@@ -12,17 +12,24 @@ fn add_helper(ctx: ?*qjs.JSContext) void {
     _ = qjs.JS_SetPropertyStr(ctx, global_obj, "print", qjs.JS_NewCFunction(ctx, js_print, "print", 1));
 }
 
-fn js_print(ctx: ?*qjs.JSContext, _: qjs.JSValue, argc: c_int, argv: [*c]qjs.JSValue) callconv(.C) qjs.JSValue {
-    const stdout = std.io.getStdOut().writer();
+fn writeToStdout(bytes: []const u8) void {
+    std.Io.File.stdout().writeStreamingAll(std.Options.debug_io, bytes) catch {};
+}
+
+fn writeToStderr(bytes: []const u8) void {
+    std.Io.File.stderr().writeStreamingAll(std.Options.debug_io, bytes) catch {};
+}
+
+fn js_print(ctx: ?*qjs.JSContext, _: qjs.JSValue, argc: c_int, argv: [*c]qjs.JSValue) callconv(.c) qjs.JSValue {
     const args = argv[0..@as(usize, @intCast(argc))];
     for (args, 0..) |arg, index| {
         if (index > 0) {
-            stdout.writeAll(" ") catch {};
+            writeToStdout(" ");
         }
         const str = qjs.JS_ToCString(ctx, arg);
-        stdout.writeAll(str[0..c.strlen(str)]) catch {};
+        writeToStdout(str[0..c.strlen(str)]);
     }
-    stdout.writeAll("\n") catch {};
+    writeToStdout("\n");
 
     return qjs.JS_UNDEFINED;
 }
@@ -51,27 +58,24 @@ fn zig_eval(buf: []const u8) []const u8 {
     return ret[0..c.strlen(ret)];
 }
 
-pub fn main() anyerror!void {
-    var general_purpose_allocator = std.heap.GeneralPurposeAllocator(.{}){};
-    const gpa = general_purpose_allocator.allocator();
+pub fn main(init: std.process.Init) anyerror!void {
+    const allocator = init.gpa;
+    const io = init.io;
 
-    const args = try std.process.argsAlloc(gpa);
-    defer std.process.argsFree(gpa, args);
+    var args_iter = try std.process.Args.Iterator.initAllocator(init.minimal.args, allocator);
+    defer args_iter.deinit();
 
-    if (args.len < 2) {
-        const stderr = std.io.getStdErr().writer();
-        try stderr.print("usage: zigjs <expr>\n", .{});
+    // skip argv[0]
+    _ = args_iter.next();
+
+    const path = args_iter.next() orelse {
+        writeToStderr("usage: zigjs <expr>\n");
         std.process.exit(1);
-    }
+    };
 
-    const path = args[1];
-    const stdout = std.io.getStdOut().writer();
-
-    var file = try std.fs.cwd().openFile(path, .{});
-    defer file.close();
-
-    const contents = try file.readToEndAlloc(gpa, 16 * (1 << 20));
-    try stdout.writeAll(zig_eval(contents[0..]));
+    const contents = try std.Io.Dir.readFileAlloc(.cwd(), io, path, allocator, .unlimited);
+    const result = zig_eval(contents);
+    try std.Io.File.stdout().writeStreamingAll(io, result);
 }
 
 const expectEqualStrings = std.testing.expectEqualStrings;

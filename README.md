@@ -4,7 +4,7 @@ A PoC of QuickJS WASI on Zig
 
 ## Build
 
-it requires zig 0.13
+it requires zig 0.16
 
 ```
 $ zig build -Doptimize=ReleaseSmall
