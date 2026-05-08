@@ -1,3 +1,16 @@
+diff --git a/src/vendor/dtoa.c b/src/vendor/dtoa.c
+index ac1be8d..1c78595 100644
+--- a/src/vendor/dtoa.c
++++ b/src/vendor/dtoa.c
+@@ -30,7 +30,7 @@
+ #include <ctype.h>
+ #include <sys/time.h>
+ #include <math.h>
+-#include <setjmp.h>
++// #include <setjmp.h> /* setjmp.h removed: unused and requires wasm exception handling */
+ 
+ #include "cutils.h"
+ #include "dtoa.h"
 diff --git a/src/vendor/quickjs.c b/src/vendor/quickjs.c
 index 223be7b..0e9ca6b 100644
 --- a/src/vendor/quickjs.c
@@ -40,5 +53,5 @@ index 223be7b..0e9ca6b 100644
 -#elif defined(EMSCRIPTEN)
 +#elif defined(EMSCRIPTEN) || defined(__wasi__)
      return 0;
- #elif defined(__linux__)
+ #elif defined(__linux__) || defined(__GLIBC__)
      return malloc_usable_size((void *)ptr);
